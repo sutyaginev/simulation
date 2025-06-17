@@ -43,4 +43,10 @@ public class Board {
     public void removeEntity(Coordinate coordinate) {
         entities.remove(coordinate);
     }
+
+    public <T extends Entity> int getActualEntityCount(Class<T> entityClass) {
+        return (int) entities.values().stream()
+                .filter(entityClass::isInstance)
+                .count();
+    }
 }
