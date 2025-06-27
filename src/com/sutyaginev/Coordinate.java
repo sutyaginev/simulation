@@ -2,20 +2,20 @@ package com.sutyaginev;
 
 public class Coordinate {
 
-    final Integer vertical;
-    final Integer horizontal;
+    final Integer x;
+    final Integer y;
 
-    public Coordinate(Integer vertical, Integer horizontal) {
-        this.vertical = vertical;
-        this.horizontal = horizontal;
+    public Coordinate(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public Integer getVertical() {
-        return vertical;
+    public Integer getX() {
+        return x;
     }
 
-    public Integer getHorizontal() {
-        return horizontal;
+    public Integer getY() {
+        return y;
     }
 
     @Override
@@ -25,14 +25,14 @@ public class Coordinate {
 
         Coordinate that = (Coordinate) o;
 
-        if (!vertical.equals(that.vertical)) return false;
-        return horizontal.equals(that.horizontal);
+        if (!x.equals(that.x)) return false;
+        return y.equals(that.y);
     }
 
     @Override
     public int hashCode() {
-        int result = vertical.hashCode();
-        result = 31 * result + horizontal.hashCode();
+        int result = x.hashCode();
+        result = 31 * result + y.hashCode();
         return result;
     }
 }

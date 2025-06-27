@@ -28,21 +28,21 @@ public class Generator {
 
     }
 
-    private <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
+    public <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
         int currentCount = board.getActualEntityCount(entityClass);
         for (int i = currentCount; i < targetCount; i++) {
             Entity entity = supplier.get();
-            board.addEntity(entity.getCoordinate(), entity);
+            board.addEntity(entity);
         }
     }
 
-    private Coordinate generateRandomEmptyCoordinate(Board board) {
+    public Coordinate generateRandomEmptyCoordinate(Board board) {
         Random random = new Random();
 
         while (true) {
-            int vertical = random.nextInt(board.getWidth()) + 1;
-            int horizontal = random.nextInt(board.getHeight()) + 1;
-            Coordinate coordinate = new Coordinate(vertical, horizontal);
+            int x = random.nextInt(board.getWidth());
+            int y = random.nextInt(board.getHeight());
+            Coordinate coordinate = new Coordinate(x, y);
 
             if (board.isCellEmpty(coordinate)) {
                 return coordinate;

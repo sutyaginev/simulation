@@ -28,6 +28,13 @@ public class Board {
         return entities;
     }
 
+    public boolean isInBounds(Coordinate coordinate) {
+        Integer x = coordinate.getX();
+        Integer y = coordinate.getY();
+
+        return x >= 0 && x < height && y >= 0 && y < width;
+    }
+
     public boolean isCellEmpty(Coordinate coordinate) {
         return !entities.containsKey(coordinate);
     }
@@ -36,8 +43,8 @@ public class Board {
         return entities.get(coordinate);
     }
 
-    public void addEntity(Coordinate coordinate, Entity entity) {
-        entities.put(coordinate, entity);
+    public void addEntity(Entity entity) {
+        entities.put(entity.getCoordinate(), entity);
     }
 
     public void removeEntity(Coordinate coordinate) {
