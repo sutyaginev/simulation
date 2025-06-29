@@ -43,7 +43,7 @@ public class Generator {
         generateEntities(board, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
     }
 
-    private  <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
+    private <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
         int currentCount = board.getActualEntityCount(entityClass);
         for (int i = currentCount; i < targetCount; i++) {
             Entity entity = supplier.get();
