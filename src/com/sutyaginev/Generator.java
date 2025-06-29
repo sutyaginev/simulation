@@ -1,27 +1,38 @@
 package com.sutyaginev;
 
-import com.sutyaginev.entities.Entity;
-import com.sutyaginev.entities.Grass;
-import com.sutyaginev.entities.Herbivore;
-import com.sutyaginev.entities.Predator;
+import com.sutyaginev.entities.*;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class Generator {
 
-    public void generateStartEntitiesPositions(Board board) {
-        int totalCells = board.getHeight() * board.getWidth();
+    Board board;
+    private final int totalCells;
+    private final int treeCount;
+    private final int rockCount;
+    private final int grassCount;
+    private final int herbivoreCount;
+    private final int predatorCount;
 
-        int targetGrassCount = Math.max(1, totalCells / 20);
-        int targetHerbivoreCount = Math.max(1, totalCells / 40);
-        int targetPredatorCount = Math.max(1, totalCells / 200);
+    public Generator(Board board) {
+        this.board = board;
+        totalCells = board.getHeight() * board.getWidth();
+        treeCount = Math.max(1, totalCells / 20);
+        rockCount = Math.max(1, totalCells / 20);
+        grassCount = Math.max(1, totalCells / 20);
+        herbivoreCount = Math.max(1, totalCells / 40);
+        predatorCount = Math.max(1, totalCells / 200);
+    }
 
-        generateEntities(board, targetGrassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate(board)));
-        generateEntities(board, targetHerbivoreCount, Herbivore.class, () -> new Herbivore(generateRandomEmptyCoordinate(board),
+    public void generateStartEntitiesPositions() {
+        generateEntities(board, treeCount, Tree.class, () -> new Tree(generateRandomEmptyCoordinate()));
+        generateEntities(board, rockCount, Rock.class, () -> new Rock(generateRandomEmptyCoordinate()));
+        generateEntities(board, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
+        generateEntities(board, herbivoreCount, Herbivore.class, () -> new Herbivore(generateRandomEmptyCoordinate(),
                 10,
                 2));
-        generateEntities(board, targetPredatorCount, Predator.class, () -> new Predator(generateRandomEmptyCoordinate(board),
+        generateEntities(board, predatorCount, Predator.class, () -> new Predator(generateRandomEmptyCoordinate(),
                 20,
                 1,
                 5));
@@ -36,7 +47,7 @@ public class Generator {
         }
     }
 
-    public Coordinate generateRandomEmptyCoordinate(Board board) {
+    public Coordinate generateRandomEmptyCoordinate() {
         Random random = new Random();
 
         while (true) {
@@ -48,5 +59,9 @@ public class Generator {
                 return coordinate;
             }
         }
+    }
+
+    public void regenerateGrass() {
+        generateEntities(board, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
     }
 }

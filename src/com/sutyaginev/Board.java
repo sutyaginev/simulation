@@ -1,8 +1,11 @@
 package com.sutyaginev;
 
+import com.sutyaginev.entities.Creature;
 import com.sutyaginev.entities.Entity;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -26,6 +29,13 @@ public class Board {
 
     public Map<Coordinate, Entity> getEntities() {
         return entities;
+    }
+
+    public List<Creature> getCreatures() {
+        return entities.values().stream()
+                .filter(entity -> entity instanceof Creature)
+                .map(entity -> (Creature) entity)
+                .collect(Collectors.toList());
     }
 
     public boolean isInBounds(Coordinate coordinate) {

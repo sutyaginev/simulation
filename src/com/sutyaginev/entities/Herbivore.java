@@ -1,5 +1,6 @@
 package com.sutyaginev.entities;
 
+import com.sutyaginev.Board;
 import com.sutyaginev.Coordinate;
 
 import java.util.function.Predicate;
@@ -11,7 +12,13 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    Predicate<Entity> getTargetPredicate() {
+    protected Predicate<Entity> getTargetPredicate() {
         return entity -> entity instanceof Grass;
+    }
+
+    @Override
+    protected void attack(Board board, Coordinate nextStep) {
+        setHp(getHp() + 1);
+        move(board, nextStep);
     }
 }

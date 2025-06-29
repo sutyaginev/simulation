@@ -9,12 +9,14 @@ import java.util.function.Predicate;
 
 public abstract class Creature extends Entity {
 
-    private final int hp;
+    private int hp;
+    private final int maxHp;
     private final int speed;
 
     public Creature(Coordinate coordinate, int hp, int speed) {
         super(coordinate);
         this.hp = hp;
+        maxHp = hp;
         this.speed = speed;
     }
 
@@ -22,8 +24,8 @@ public abstract class Creature extends Entity {
         return hp;
     }
 
-    public int getSpeed() {
-        return speed;
+    public void setHp(int hp) {
+        this.hp = Math.min(hp, maxHp);
     }
 
     public void makeTurn(Board board, PathFinder pathFinder) {
@@ -46,17 +48,17 @@ public abstract class Creature extends Entity {
         }
     }
 
-    private void move(Board board, Coordinate nextStep) {
+    protected void move(Board board, Coordinate nextStep) {
         board.removeEntity(getCoordinate());
         setCoordinate(nextStep);
         board.addEntity(this);
     }
 
-    private void attack(Board board, Coordinate nextStep) {
-        move(board, nextStep);
+    protected abstract void attack(Board board, Coordinate nextStep);
+
+    protected abstract Predicate<Entity> getTargetPredicate();
+
+    protected boolean isAlive() {
+        return hp > 0;
     }
-
-    abstract Predicate<Entity> getTargetPredicate();
-
-
 }

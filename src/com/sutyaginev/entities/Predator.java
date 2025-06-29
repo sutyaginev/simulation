@@ -1,5 +1,6 @@
 package com.sutyaginev.entities;
 
+import com.sutyaginev.Board;
 import com.sutyaginev.Coordinate;
 
 import java.util.function.Predicate;
@@ -14,7 +15,22 @@ public class Predator extends Creature {
     }
 
     @Override
-    Predicate<Entity> getTargetPredicate() {
+    protected Predicate<Entity> getTargetPredicate() {
         return entity -> entity instanceof Herbivore;
+    }
+
+    @Override
+    protected void attack(Board board, Coordinate nextStep) {
+        Entity entity = board.getEntity(nextStep);
+
+        if (!(entity instanceof Creature target)) {
+            return;
+        }
+
+        target.setHp(target.getHp() - attack);
+
+        if (!target.isAlive()) {
+            move(board, nextStep);
+        }
     }
 }
