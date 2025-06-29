@@ -1,7 +1,7 @@
 package com.sutyaginev.pathfinder;
 
-import com.sutyaginev.Board;
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.world.Coordinate;
 import com.sutyaginev.entities.Entity;
 
 import java.util.*;
@@ -9,10 +9,10 @@ import java.util.function.Predicate;
 
 public class BreadthFirstSearch implements PathFinder {
 
-    private final Board board;
+    private final WorldMap worldMap;
 
-    public BreadthFirstSearch(Board board) {
-        this.board = board;
+    public BreadthFirstSearch(WorldMap worldMap) {
+        this.worldMap = worldMap;
     }
 
     @Override
@@ -33,18 +33,18 @@ public class BreadthFirstSearch implements PathFinder {
             for (int[] direction : directions) {
                 Coordinate neighbour = new Coordinate(current.getX() + direction[0], current.getY() + direction[1]);
 
-                if (!board.isInBounds(neighbour)) {
+                if (!worldMap.isInBounds(neighbour)) {
                     continue;
                 }
 
-                Entity entity = board.getEntity(neighbour);
+                Entity entity = worldMap.getEntity(neighbour);
 
                 if (entity != null && targetCondition.test(entity)) {
                     parents.put(neighbour, current);
                     return getPathToTarget(parents, start, neighbour);
                 }
 
-                if (!isVisited(visited, neighbour) && board.isCellEmpty(neighbour)) {
+                if (!isVisited(visited, neighbour) && worldMap.isCellEmpty(neighbour)) {
                     parents.put(neighbour, current);
                     queue.add(neighbour);
                 }

@@ -1,6 +1,6 @@
 package com.sutyaginev.entities;
 
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.Coordinate;
 
 public class Tree extends Entity {
 

@@ -1,4 +1,4 @@
-import com.sutyaginev.Simulation;
+package com.sutyaginev;
 
 public class Main {
 

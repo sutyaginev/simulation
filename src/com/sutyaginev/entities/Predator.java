@@ -1,7 +1,7 @@
 package com.sutyaginev.entities;
 
-import com.sutyaginev.Board;
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.world.Coordinate;
 
 import java.util.function.Predicate;
 
@@ -20,8 +20,8 @@ public class Predator extends Creature {
     }
 
     @Override
-    protected void attack(Board board, Coordinate nextStep) {
-        Entity entity = board.getEntity(nextStep);
+    protected void attack(WorldMap worldMap, Coordinate nextStep) {
+        Entity entity = worldMap.getEntity(nextStep);
 
         if (!(entity instanceof Creature target)) {
             return;
@@ -30,7 +30,7 @@ public class Predator extends Creature {
         target.setHp(target.getHp() - attack);
 
         if (!target.isAlive()) {
-            move(board, nextStep);
+            move(worldMap, nextStep);
         }
     }
 }

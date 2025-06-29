@@ -1,6 +1,6 @@
 package com.sutyaginev.pathfinder;
 
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.Coordinate;
 import com.sutyaginev.entities.Entity;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.sutyaginev.entities;
 
-import com.sutyaginev.Board;
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.world.Coordinate;
 import com.sutyaginev.pathfinder.PathFinder;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public abstract class Creature extends Entity {
         this.hp = Math.min(hp, maxHp);
     }
 
-    public void makeTurn(Board board, PathFinder pathFinder) {
+    public void makeTurn(WorldMap worldMap, PathFinder pathFinder) {
         List<Coordinate> pathToTarget = pathFinder.findPathToNearest(getCoordinate(), getTargetPredicate());
 
         if (pathToTarget == null || pathToTarget.isEmpty()) {
@@ -37,24 +37,24 @@ public abstract class Creature extends Entity {
 
         for (int i = 0; i < speed; i++) {
             Coordinate nextStep = pathToTarget.get(i);
-            Entity entity = board.getEntity(nextStep);
+            Entity entity = worldMap.getEntity(nextStep);
 
             if (entity == null) {
-                move(board, nextStep);
+                move(worldMap, nextStep);
             } else {
-                attack(board, nextStep);
+                attack(worldMap, nextStep);
                 return;
             }
         }
     }
 
-    protected void move(Board board, Coordinate nextStep) {
-        board.removeEntity(getCoordinate());
+    protected void move(WorldMap worldMap, Coordinate nextStep) {
+        worldMap.removeEntity(getCoordinate());
         setCoordinate(nextStep);
-        board.addEntity(this);
+        worldMap.addEntity(this);
     }
 
-    protected abstract void attack(Board board, Coordinate nextStep);
+    protected abstract void attack(WorldMap worldMap, Coordinate nextStep);
 
     protected abstract Predicate<Entity> getTargetPredicate();
 

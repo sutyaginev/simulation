@@ -6,6 +6,9 @@ import com.sutyaginev.actions.GenerateEntitiesAction;
 import com.sutyaginev.actions.RegenerateGrassAction;
 import com.sutyaginev.entities.Herbivore;
 import com.sutyaginev.pathfinder.BreadthFirstSearch;
+import com.sutyaginev.utility.Generator;
+import com.sutyaginev.utility.Renderer;
+import com.sutyaginev.world.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +16,7 @@ import java.util.List;
 
 public class Simulation {
 
-    private final Board board;
+    private final WorldMap worldMap;
     private final Renderer renderer;
     private final Generator generator;
     private final List<Action> initActions;
@@ -22,9 +25,9 @@ public class Simulation {
     private boolean isRunning;
 
     public Simulation(int width, int height) {
-        board = new Board(width, height, new HashMap<>());
+        worldMap = new WorldMap(width, height, new HashMap<>());
         renderer = new Renderer();
-        generator = new Generator(board);
+        generator = new Generator(worldMap);
         turnCounter = 0;
         isRunning = false;
         initActions = new ArrayList<>();
@@ -40,7 +43,7 @@ public class Simulation {
         isRunning = true;
         executeInitActions();
 
-        while (isRunning && board.getActualEntityCount(Herbivore.class) > 0) {
+        while (isRunning && worldMap.getActualEntityCount(Herbivore.class) > 0) {
             nextTurn();
             try {
                 Thread.sleep(1);
@@ -67,7 +70,7 @@ public class Simulation {
     private void nextTurn() {
         System.out.println("Turn: " + (++turnCounter));
         executeTurnActions();
-        renderer.render(board);
+        renderer.render(worldMap);
         System.out.println();
     }
 
@@ -81,19 +84,19 @@ public class Simulation {
 
     private void setupDefaultActions() {
         addInitAction(new GenerateEntitiesAction(generator));
-        addTurnAction(new CreaturesTurnAction(new BreadthFirstSearch(board)));
+        addTurnAction(new CreaturesTurnAction(new BreadthFirstSearch(worldMap)));
         addTurnAction(new RegenerateGrassAction(generator));
     }
 
     private void executeInitActions() {
         for (Action initAction : initActions) {
-            initAction.execute(board);
+            initAction.execute(worldMap);
         }
     }
 
     private void executeTurnActions() {
         for (Action turnAction : turnActions) {
-            turnAction.execute(board);
+            turnAction.execute(worldMap);
         }
     }
 }

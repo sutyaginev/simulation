@@ -1,7 +1,7 @@
 package com.sutyaginev.entities;
 
-import com.sutyaginev.Board;
-import com.sutyaginev.Coordinate;
+import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.world.Coordinate;
 
 import java.util.function.Predicate;
 
@@ -17,8 +17,8 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    protected void attack(Board board, Coordinate nextStep) {
+    protected void attack(WorldMap worldMap, Coordinate nextStep) {
         setHp(getHp() + 1);
-        move(board, nextStep);
+        move(worldMap, nextStep);
     }
 }

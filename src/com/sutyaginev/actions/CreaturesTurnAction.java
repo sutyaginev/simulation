@@ -1,6 +1,6 @@
 package com.sutyaginev.actions;
 
-import com.sutyaginev.Board;
+import com.sutyaginev.world.WorldMap;
 import com.sutyaginev.entities.Creature;
 import com.sutyaginev.pathfinder.PathFinder;
 
@@ -13,13 +13,13 @@ public class CreaturesTurnAction implements Action {
     }
 
     @Override
-    public void execute(Board board) {
-        for (Creature creature : board.getCreatures()) {
-            if (creature != board.getEntity(creature.getCoordinate())) { // Существо могло быть съедено ранее
+    public void execute(WorldMap worldMap) {
+        for (Creature creature : worldMap.getCreatures()) {
+            if (creature != worldMap.getEntity(creature.getCoordinate())) { // Существо могло быть съедено ранее
                 continue;
             }
 
-            creature.makeTurn(board, pathFinder);
+            creature.makeTurn(worldMap, pathFinder);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.sutyaginev;
+package com.sutyaginev.world;
 
 import com.sutyaginev.entities.Creature;
 import com.sutyaginev.entities.Entity;
@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Board {
+public class WorldMap {
 
     private final int width;
     private final int height;
     private final Map<Coordinate, Entity> entities;
 
-    public Board(int width, int height, Map<Coordinate, Entity> entities) {
+    public WorldMap(int width, int height, Map<Coordinate, Entity> entities) {
         this.width = width;
         this.height = height;
         this.entities = entities;

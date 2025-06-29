@@ -1,7 +1,7 @@
 package com.sutyaginev.actions;
 
-import com.sutyaginev.Board;
-import com.sutyaginev.Generator;
+import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.utility.Generator;
 
 public class RegenerateGrassAction implements Action {
 
@@ -12,7 +12,7 @@ public class RegenerateGrassAction implements Action {
     }
 
     @Override
-    public void execute(Board board) {
+    public void execute(WorldMap worldMap) {
         generator.regenerateGrass();
     }
 }

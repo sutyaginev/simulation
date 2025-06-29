@@ -1,8 +1,8 @@
 package com.sutyaginev.actions;
 
-import com.sutyaginev.Board;
+import com.sutyaginev.world.WorldMap;
 
 public interface Action {
 
-    void execute(Board board);
+    void execute(WorldMap worldMap);
 }

@@ -1,6 +1,8 @@
-package com.sutyaginev;
+package com.sutyaginev.utility;
 
 import com.sutyaginev.entities.Entity;
+import com.sutyaginev.world.Coordinate;
+import com.sutyaginev.world.WorldMap;
 
 public class Renderer {
 
@@ -8,16 +10,16 @@ public class Renderer {
     private static final String ANSI_CELL_BACKGROUND = "\u001B[40m";
     private static final String ANSI_EMPTY_CELL_SPRITE = "\u2005".repeat(8); // 🏿 🏾 🏽 🏼 🏻
 
-    public void render(Board board) {
-        for (int y = board.getHeight() - 1; y >= 0; y--) {
+    public void render(WorldMap worldMap) {
+        for (int y = worldMap.getHeight() - 1; y >= 0; y--) {
             StringBuilder line = new StringBuilder(ANSI_CELL_BACKGROUND);
-            for (int x = 0; x < board.getWidth(); x++) {
+            for (int x = 0; x < worldMap.getWidth(); x++) {
                 Coordinate coordinate = new Coordinate(x, y);
 
-                if (board.isCellEmpty(coordinate)) {
+                if (worldMap.isCellEmpty(coordinate)) {
                     line.append(getEmptyCellSprite());
                 } else {
-                    line.append(getEntitySprite(board.getEntity(coordinate)));
+                    line.append(getEntitySprite(worldMap.getEntity(coordinate)));
                 }
             }
 
