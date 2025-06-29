@@ -17,7 +17,7 @@ public class Generator {
 
     public Generator(Board board) {
         this.board = board;
-        totalCells = board.getHeight() * board.getWidth();
+        totalCells = board.getWidth() * board.getHeight();
         treeCount = Math.max(1, totalCells / 20);
         rockCount = Math.max(1, totalCells / 20);
         grassCount = Math.max(1, totalCells / 20);
@@ -39,7 +39,11 @@ public class Generator {
 
     }
 
-    public <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
+    public void regenerateGrass() {
+        generateEntities(board, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
+    }
+
+    private  <T extends Entity> void generateEntities(Board board, int targetCount, Class<T> entityClass, Supplier<T> supplier) {
         int currentCount = board.getActualEntityCount(entityClass);
         for (int i = currentCount; i < targetCount; i++) {
             Entity entity = supplier.get();
@@ -47,7 +51,7 @@ public class Generator {
         }
     }
 
-    public Coordinate generateRandomEmptyCoordinate() {
+    private Coordinate generateRandomEmptyCoordinate() {
         Random random = new Random();
 
         while (true) {
@@ -59,9 +63,5 @@ public class Generator {
                 return coordinate;
             }
         }
-    }
-
-    public void regenerateGrass() {
-        generateEntities(board, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
     }
 }

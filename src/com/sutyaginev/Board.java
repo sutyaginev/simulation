@@ -9,22 +9,22 @@ import java.util.stream.Collectors;
 
 public class Board {
 
-    private final int height;
     private final int width;
+    private final int height;
     private final Map<Coordinate, Entity> entities;
 
-    public Board(int height, int width, Map<Coordinate, Entity> entities) {
-        this.height = height;
+    public Board(int width, int height, Map<Coordinate, Entity> entities) {
         this.width = width;
+        this.height = height;
         this.entities = entities;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public int getWidth() {
         return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public Map<Coordinate, Entity> getEntities() {
@@ -42,7 +42,7 @@ public class Board {
         Integer x = coordinate.getX();
         Integer y = coordinate.getY();
 
-        return x >= 0 && x < height && y >= 0 && y < width;
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 
     public boolean isCellEmpty(Coordinate coordinate) {
