@@ -33,10 +33,10 @@ public class Generator {
         generateEntities(worldMap, grassCount, Grass.class, () -> new Grass(generateRandomEmptyCoordinate()));
         generateEntities(worldMap, herbivoreCount, Herbivore.class, () -> new Herbivore(generateRandomEmptyCoordinate(),
                 10,
-                2));
+                3));
         generateEntities(worldMap, predatorCount, Predator.class, () -> new Predator(generateRandomEmptyCoordinate(),
                 20,
-                1,
+                2,
                 5));
 
     }

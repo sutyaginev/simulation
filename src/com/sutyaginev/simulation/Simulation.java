@@ -13,6 +13,7 @@ import com.sutyaginev.simulation.world.WorldMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Simulation {
 
@@ -22,7 +23,8 @@ public class Simulation {
     private final List<Action> initActions;
     private final List<Action> turnActions;
     private int turnCounter;
-    private boolean isRunning;
+    private volatile boolean isRunning;
+    private volatile boolean isPaused;
 
     public Simulation(int width, int height) {
         worldMap = new WorldMap(width, height, new HashMap<>());
@@ -30,6 +32,7 @@ public class Simulation {
         generator = new Generator(worldMap);
         turnCounter = 0;
         isRunning = false;
+        isPaused = false;
         initActions = new ArrayList<>();
         turnActions = new ArrayList<>();
         setupDefaultActions();
@@ -43,23 +46,45 @@ public class Simulation {
         isRunning = true;
         executeInitActions();
 
-        while (isRunning && worldMap.getActualEntityCount(Herbivore.class) > 0) {
-            nextTurn();
+        Thread simulationThread = new Thread(() -> {
+            while (isRunning && worldMap.getActualEntityCount(Herbivore.class) > 0) {
+                if (!isPaused) {
+                    nextTurn();
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+            if (isRunning) {
+                System.out.println("Все травоядные съедены. Симуляция завершена.");
+                isRunning = false;
+            }
+        });
+
+        Thread inputThread = new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+            while (isRunning) {
+                scanner.nextLine();
+                togglePause();
+            }
+            scanner.close();
+        });
+
+        inputThread.setDaemon(true);
+        simulationThread.start();
+        inputThread.start();
+    }
+
+    private synchronized void togglePause() {
+        isPaused = !isPaused;
+        if (isPaused) {
+            System.out.println("Симуляция на паузе. Нажмите Enter, чтобы продолжить...");
+        } else {
+            System.out.println("Симуляция продолжается...");
         }
-
-        System.out.println("Все травоядные съедены. Симуляция остановлена.");
-    }
-
-    public void pauseSimulation() {
-        isRunning = false;
-    }
-
-    public int getTurnCounter() {
-        return turnCounter;
-    }
-
-    public boolean isRunning() {
-        return isRunning;
     }
 
     private void nextTurn() {
