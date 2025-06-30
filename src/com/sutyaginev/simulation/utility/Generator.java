@@ -1,8 +1,8 @@
-package com.sutyaginev.utility;
+package com.sutyaginev.simulation.utility;
 
-import com.sutyaginev.entities.*;
-import com.sutyaginev.world.Coordinate;
-import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.simulation.entity.*;
+import com.sutyaginev.simulation.world.Coordinate;
+import com.sutyaginev.simulation.world.WorldMap;
 
 import java.util.Random;
 import java.util.function.Supplier;

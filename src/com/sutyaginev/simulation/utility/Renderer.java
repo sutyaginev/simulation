@@ -1,8 +1,8 @@
-package com.sutyaginev.utility;
+package com.sutyaginev.simulation.utility;
 
-import com.sutyaginev.entities.Entity;
-import com.sutyaginev.world.Coordinate;
-import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.simulation.entity.Entity;
+import com.sutyaginev.simulation.world.WorldMap;
+import com.sutyaginev.simulation.world.Coordinate;
 
 public class Renderer {
 
@@ -37,7 +37,7 @@ public class Renderer {
             case "Rock":
                 return "\u2005" + "🪨" + "\u2005";
             case "Tree":
-                return "\u2005" + "🌵" + "\u2005"; // 🌳
+                return "\u2005" + "🌳" + "\u2005"; // 🌵
             case "Grass":
                 return "\u2005" + "🌾" + "\u2005"; // 🌿
             case "Herbivore":

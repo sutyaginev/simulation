@@ -1,4 +1,4 @@
-package com.sutyaginev.world;
+package com.sutyaginev.simulation.world;
 
 public class Coordinate {
 

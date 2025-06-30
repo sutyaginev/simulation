@@ -1,7 +1,7 @@
-package com.sutyaginev.actions;
+package com.sutyaginev.simulation.action;
 
-import com.sutyaginev.world.WorldMap;
-import com.sutyaginev.utility.Generator;
+import com.sutyaginev.simulation.utility.Generator;
+import com.sutyaginev.simulation.world.WorldMap;
 
 public class RegenerateGrassAction implements Action {
 

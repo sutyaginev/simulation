@@ -1,14 +1,14 @@
-package com.sutyaginev;
+package com.sutyaginev.simulation;
 
-import com.sutyaginev.actions.Action;
-import com.sutyaginev.actions.CreaturesTurnAction;
-import com.sutyaginev.actions.GenerateEntitiesAction;
-import com.sutyaginev.actions.RegenerateGrassAction;
-import com.sutyaginev.entities.Herbivore;
-import com.sutyaginev.pathfinder.BreadthFirstSearch;
-import com.sutyaginev.utility.Generator;
-import com.sutyaginev.utility.Renderer;
-import com.sutyaginev.world.WorldMap;
+import com.sutyaginev.simulation.action.Action;
+import com.sutyaginev.simulation.action.CreaturesTurnAction;
+import com.sutyaginev.simulation.action.GenerateEntitiesAction;
+import com.sutyaginev.simulation.action.RegenerateGrassAction;
+import com.sutyaginev.simulation.entity.Herbivore;
+import com.sutyaginev.simulation.pathfinder.BreadthFirstSearch;
+import com.sutyaginev.simulation.utility.Generator;
+import com.sutyaginev.simulation.utility.Renderer;
+import com.sutyaginev.simulation.world.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,11 +45,6 @@ public class Simulation {
 
         while (isRunning && worldMap.getActualEntityCount(Herbivore.class) > 0) {
             nextTurn();
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
         }
 
         System.out.println("Все травоядные съедены. Симуляция остановлена.");

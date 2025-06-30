@@ -1,7 +1,7 @@
-package com.sutyaginev.world;
+package com.sutyaginev.simulation.world;
 
-import com.sutyaginev.entities.Creature;
-import com.sutyaginev.entities.Entity;
+import com.sutyaginev.simulation.entity.Creature;
+import com.sutyaginev.simulation.entity.Entity;
 
 import java.util.List;
 import java.util.Map;

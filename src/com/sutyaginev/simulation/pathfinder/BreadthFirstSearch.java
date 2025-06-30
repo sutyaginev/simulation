@@ -1,8 +1,8 @@
-package com.sutyaginev.pathfinder;
+package com.sutyaginev.simulation.pathfinder;
 
-import com.sutyaginev.world.WorldMap;
-import com.sutyaginev.world.Coordinate;
-import com.sutyaginev.entities.Entity;
+import com.sutyaginev.simulation.world.Coordinate;
+import com.sutyaginev.simulation.world.WorldMap;
+import com.sutyaginev.simulation.entity.Entity;
 
 import java.util.*;
 import java.util.function.Predicate;

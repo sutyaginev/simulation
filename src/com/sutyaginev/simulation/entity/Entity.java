@@ -1,6 +1,6 @@
-package com.sutyaginev.entities;
+package com.sutyaginev.simulation.entity;
 
-import com.sutyaginev.world.Coordinate;
+import com.sutyaginev.simulation.world.Coordinate;
 
 public class Entity {
 

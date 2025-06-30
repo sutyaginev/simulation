@@ -1,7 +1,7 @@
-package com.sutyaginev.entities;
+package com.sutyaginev.simulation.entity;
 
-import com.sutyaginev.world.WorldMap;
-import com.sutyaginev.world.Coordinate;
+import com.sutyaginev.simulation.world.Coordinate;
+import com.sutyaginev.simulation.world.WorldMap;
 
 import java.util.function.Predicate;
 

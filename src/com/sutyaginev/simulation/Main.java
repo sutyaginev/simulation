@@ -1,4 +1,4 @@
-package com.sutyaginev;
+package com.sutyaginev.simulation;
 
 public class Main {
 

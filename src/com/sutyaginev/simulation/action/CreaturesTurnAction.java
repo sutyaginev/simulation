@@ -1,8 +1,8 @@
-package com.sutyaginev.actions;
+package com.sutyaginev.simulation.action;
 
-import com.sutyaginev.world.WorldMap;
-import com.sutyaginev.entities.Creature;
-import com.sutyaginev.pathfinder.PathFinder;
+import com.sutyaginev.simulation.world.WorldMap;
+import com.sutyaginev.simulation.entity.Creature;
+import com.sutyaginev.simulation.pathfinder.PathFinder;
 
 public class CreaturesTurnAction implements Action {
 
