@@ -32,7 +32,7 @@ public class Renderer {
         return ANSI_CELL_BACKGROUND + ANSI_EMPTY_CELL_SPRITE;
     }
 
-    public String getEntitySprite(Entity entity) {
+    private String getEntitySprite(Entity entity) {
         switch (entity.getClass().getSimpleName()) {
             case "Rock":
                 return "\u2005" + "🪨" + "\u2005";
